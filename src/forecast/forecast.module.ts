@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { HttpModule } from '@nestjs/axios';
 import { ForecastController } from './forecast.controller';
 import { ForecastService } from './forecast.service';
-import { ConfigModule } from '@nestjs/config';
+import { OpenWeatherModule } from 'src/openweather/openweather.module';
 
 @Module({
-    imports: [ConfigModule, HttpModule],
+    imports: [OpenWeatherModule],
     controllers: [ForecastController],
     providers: [ForecastService],
 })
