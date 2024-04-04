@@ -6,9 +6,14 @@ export class ForecastController {
     constructor(private readonly forecastService: ForecastService) {}
 
     @Get("/forecast")
-    async getForecast(@Query('latitude') latitude, @Query('longitude') longitude): Promise<Object> {
-        if (Number(latitude) && Number(longitude)) {
-            return await this.forecastService.getForecast(latitude, longitude);
+    async getForecast(
+        @Query('latitude') latitude: string, 
+        @Query('longitude') longitude: string): Promise<Object> {
+
+        const latitudeNumber = Number(latitude);
+        const longitudeNumber = Number(longitude);
+        if (latitudeNumber && longitudeNumber) {
+            return await this.forecastService.getForecast(latitudeNumber, latitudeNumber);
         } else {
             throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
         }
